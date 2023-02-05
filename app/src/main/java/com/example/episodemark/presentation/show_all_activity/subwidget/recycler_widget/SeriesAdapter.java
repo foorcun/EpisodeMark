@@ -1,9 +1,12 @@
 package com.example.episodemark.presentation.show_all_activity.subwidget.recycler_widget;
 
 
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +25,8 @@ public class SeriesAdapter  extends RecyclerView.Adapter<SeriesViewHolder> {
     // ilgili data listesi
     List<Series> seriesList;
 
+//    Context context;
+
     public SeriesAdapter(ShowAllActivity showAllActivity, List<Series> seriesList) {
         this.showAllActivity = showAllActivity;
         this.seriesList = seriesList;
@@ -37,8 +42,18 @@ public class SeriesAdapter  extends RecyclerView.Adapter<SeriesViewHolder> {
 
         SeriesViewHolder seriesViewHolder = new SeriesViewHolder(itemView);
 
-        // related with Click
+        // handle item clicks here
 
+        seriesViewHolder.setOnClickListener(new SeriesViewHolder.ClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                //
+                String title = seriesList.get(position).getDiziName();
+                Log.d("series_adapter","tiklandi. position: " + position);
+                Log.d("series_adapter",seriesList.get(position).getDiziName());
+                Toast.makeText(showAllActivity,"title bu: " + title,Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return  seriesViewHolder;
     }
